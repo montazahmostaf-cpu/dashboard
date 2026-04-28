@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد زفة مودرن - تحليل مالي محسن لشهر فبراير 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #26A69A;
+            --background-color: #f9f9f9;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --profit-color: #2E7D32;
+            --loss-color: #C62828;
+            --border-color: #dddddd;
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --dark-text: #e0e0e0;
+            --highlight-color: #ff9800;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            direction: rtl;
+            text-align: center;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 20px;
+            margin: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-color);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode .container {
+            background-color: var(--dark-card);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            padding: 20px;
+            color: white;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3 {
+            color: #bb86fc;
+        }
+
+        h1 {
+            font-size: 28px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 22px;
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode h2 {
+            color: #03dac6;
+        }
+
+        .chart-container {
+            width: 100%;
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-color);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body.dark-mode .chart-container {
+            background-color: var(--dark-card);
+            border-color: #444;
+        }
+
+        .summary-card {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 15px;
+            border-radius: 8px;
+            width: 200px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .card {
+            background: linear-gradient(135deg, #2d2d2d, #3a3a3a);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-color);
+        }
+
+        body.dark-mode .card::before {
+            background: #bb86fc;
+        }
+
+        .card h4 {
+            margin: 0 0 10px 0;
+            color: var(--profit-color);
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .card h4 {
+            color: #03dac6;
+        }
+
+        .card p {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .card p {
+            color: var(--dark-text);
+        }
+
+        .profit {
+            color: var(--profit-color);
+        }
+
+        .loss {
+            color: var(--loss-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body.dark-mode th,
+        body.dark-mode td {
+            border-color: #444;
+            color: var(--dark-text);
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        body.dark-mode th {
+            background-color: #bb86fc;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode tr:nth-child(even) {
+            background-color: #2d2d2d;
+        }
+
+        tr:hover {
+            background-color: #e6f7ff;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode tr:hover {
+            background-color: #3a3a3a;
+        }
+
+        select, button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode select,
+        body.dark-mode button {
+            background-color: var(--dark-card);
+            color: var(--dark-text);
+            border-color: #444;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        body.dark-mode button {
+            background-color: #bb86fc;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        body.dark-mode button:hover {
+            background-color: #03dac6;
+        }
+
+        .filter-section {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode .filter-section {
+            background-color: #262626;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--highlight-color);
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .highlight {
+            color: #ff9800;
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .toggle {
+            cursor: pointer;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode .toggle {
+            background-color: #bb86fc;
+        }
+
+        .toggle:hover {
+            background-color: var(--secondary-color);
+        }
+
+        body.dark-mode .toggle:hover {
+            background-color: #03dac6;
+        }
+
+        .icon {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>داشبورد زفة مودرن لتنظيم الحفلات</h1>
+        <h2>تحليل مالي محسن لشهر فبراير 2026</h2>
+    </header>
+
+    <div class="toggle-container">
+        <div class="toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i>
+            <span>الوضع الداكن</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- ملخص سريع -->
+        <div class="summary-card">
+            <div class="card">
+                <h4>إجمالي الإيرادات</h4>
+                <p class="highlight" id="totalRevenue">39,600.00 د.إ</p>
+            </div>
+            <div class="card">
+                <h4>إجمالي المصروفات</h4>
+                <p class="highlight" id="totalExpenses">23,977.09 د.إ</p>
+            </div>
+            <div class="card">
+                <h4>ضريبة الإيرادات (5%)</h4>
+                <p class="highlight" id="tax">1,980.00 د.إ</p>
+            </div>
+            <div class="card">
+                <h4>صافي الربح بعد الضريبة</h4>
+                <p class="highlight profit" id="netProfit">13,642.91 د.إ</p>
+            </div>
+        </div>
+
+        <!-- قسم الفلترة -->
+        <div class="filter-section">
+            <h3>فلترة البيانات</h3>
+            <label for="dataType">نوع البيانات:</label>
+            <select id="dataType" onchange="updateCharts()">
+                <option value="revenues">إيرادات الحفلات</option>
+                <option value="expenses">المصروفات</option>
+            </select>
+        </div>
+
+        <!-- الرسوم البيانية -->
+        <div class="chart-container">
+            <h3 id="chartTitle">توزيع الإيرادات والمصروفات</h3>
+            <canvas id="mainChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h3>المقارنة بين الإيرادات والمصروفات وصافي الربح</h3>
+            <canvas id="comparisonChart"></canvas>
+        </div>
+
+        <!-- جدول تفاصيل الإيرادات -->
+        <div class="chart-container">
+            <h3>تفاصيل الإيرادات</h3>
+            <table id="revenueTable">
+                <thead>
+                    <tr>
+                        <th>مسلسل</th>
+                        <th>اسم العميل</th>
+                        <th>مكان الحفل</th>
+                        <th>قيمة العقد</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>حمد خميس إبراهيم</td>
+                        <td>أبوظبي</td>
+                        <td>32,100.00</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>منى محمد الظاهر</td>
+                        <td>زاخر</td>
+                        <td>6,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>راية علي محمد بن وديمة</td>
+                        <td>الساد</td>
+                        <td>1,500.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- جدول تفاصيل المصروفات -->
+        <div class="chart-container">
+            <h3>تفاصيل المصروفات</h3>
+            <table id="expensesTable">
+                <thead>
+                    <tr>
+                        <th>النوع</th>
+                        <th>القيمة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>المصروفات الثابتة</td>
+                        <td>15,920.09 د.إ</td>
+                    </tr>
+                    <tr>
+                        <td>المصروفات المتغيرة</td>
+                        <td>4,057.00 د.إ</td>
+                    </tr>
+                    <tr>
+                        <td>مصروفات الحفلات</td>
+                        <td>4,000.00 د.إ</td>
+                    </tr>
+                    <tr>
+                        <td><strong>إجمالي المصروفات</strong></td>
+                        <td><strong>23,977.09 د.إ</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // البيانات المالية
+        const totalRevenue = 39600.00;
+        const fixedExpenses = 15920.09;
+        const variableExpenses = 4057.00;
+        const eventExpenses = 4000.00; // مصروفات الحفلات
+        const totalExpenses = fixedExpenses + variableExpenses + eventExpenses;
+        const tax = 1980.00; // 5% من الإيرادات
+        const netProfit = totalRevenue - totalExpenses - tax;
+
+        // تحديث الملخص
+        document.getElementById('totalRevenue').textContent = totalRevenue.toFixed(2) + " د.إ";
+        document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2) + " د.إ";
+        document.getElementById('tax').textContent = tax.toFixed(2) + " د.إ";
+        document.getElementById('netProfit').textContent = netProfit.toFixed(2) + " د.إ";
+
+        // إنشاء الرسوم البيانية
+        const mainCtx = document.getElementById('mainChart').getContext('2d');
+        const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+
+        let mainChart, comparisonChart;
+
+        // رسم توزيع الإيرادات والمصروفات
+        function renderRevenuesChart() {
+            const data = {
+                labels: ['إيرادات', 'مصروفات ثابتة', 'مصروفات متغيرة', 'مصروفات الحفلات'],
+                datasets: [{
+                    data: [totalRevenue, fixedExpenses, variableExpenses, eventExpenses],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(153, 102, 255, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            if (mainChart) mainChart.destroy();
+
+            mainChart = new Chart(mainCtx, {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'right' },
+                        datalabels: {
+                            formatter: (value, ctx) => {
+                                const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = Math.round((value / total) * 100);
+                                return `${percentage}%`;
+                            },
+                            color: getComputedStyle(document.body).getPropertyValue('--text-color'),
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
+        }
+
+        // رسم توزيع المصروفات
+        function renderExpensesChart() {
+            const data = {
+                labels: ['مصروفات ثابتة', 'مصروفات متغيرة', 'مصروفات الحفلات'],
+                datasets: [{
+                    data: [fixedExpenses, variableExpenses, eventExpenses],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(153, 102, 255, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            if (mainChart) mainChart.destroy();
+
+            mainChart = new Chart(mainCtx, {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'right' },
+                        datalabels: {
+                            formatter: (value, ctx) => {
+                                const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = Math.round((value / total) * 100);
+                                return `${percentage}%`;
+                            },
+                            color: getComputedStyle(document.body).getPropertyValue('--text-color'),
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
+        }
+
+        // رسم مقارنة الإيرادات والمصروفات وصافي الربح
+        function renderComparisonChart() {
+            const data = {
+                labels: ['إيرادات', 'مصروفات', 'ضريبة', 'صافي الربح'],
+                datasets: [{
+                    label: 'القيمة (د.إ)',
+                    data: [totalRevenue, totalExpenses, tax, netProfit],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(54, 162, 235, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            if (comparisonChart) comparisonChart.destroy();
+
+            comparisonChart = new Chart(comparisonCtx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        // تحديث الرسوم البيانية
+        function updateCharts() {
+            const dataType = document.getElementById('dataType').value;
+            if (dataType === 'revenues') {
+                document.getElementById('chartTitle').textContent = 'توزيع الإيرادات والمصروفات';
+                renderRevenuesChart();
+            } else {
+                document.getElementById('chartTitle').textContent = 'توزيع المصروفات';
+                renderExpensesChart();
+            }
+            renderComparisonChart();
+        }
+
+        // تبديل الوضع الداكن
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            updateCharts();
+        }
+
+        // تهيئة الرسوم عند تحميل الصفحة
+        window.onload = function() {
+            updateCharts();
+        };
+    </script>
+</body>
+</html>
