@@ -1,215 +1,311 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحليل مالي - زفة مودرن</title>
-    <!-- مكتبات خارجية لقراءة Excel والرسم البياني -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <title>داشبورد زفة مودرن - تحليل مالي لشهر 3-2026</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #26A69A;
+            --background-color: #f9f9f9;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --profit-color: #2E7D32;
+            --loss-color: #C62828;
+            --border-color: #dddddd;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
             direction: rtl;
             text-align: right;
         }
-        h1, h2 {
-            color: #333;
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
         }
-        table {
+
+        .card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: calc(100% - 20px);
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .summary-table, .details-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin-top: 10px;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+
+        .summary-table th, .summary-table td,
+        .details-table th, .details-table td {
+            padding: 10px;
             text-align: right;
+            border: 1px solid var(--border-color);
         }
-        th {
-            background-color: #f2f2f2;
+
+        .summary-table th, .details-table th {
+            background-color: var(--primary-color);
+            color: white;
         }
+
         .chart-container {
-            width: 80%;
-            margin: 20px auto;
+            width: 100%;
+            margin-top: 20px;
         }
-        input {
-            margin: 10px 0;
+
+        .loss {
+            color: var(--loss-color);
+            font-weight: bold;
+        }
+
+        .profit {
+            color: var(--profit-color);
+            font-weight: bold;
+        }
+
+        .details-table tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-    <h1>تحليل مالي - زفة مودرن</h1>
-
-    <!-- زر تحميل ملف Excel -->
-    <input type="file" id="fileInput" accept=".xlsx, .xls" />
-
-    <!-- قسم عرض النتائج (مخفي في البداية) -->
-    <div id="results" style="display: none;">
-        <h2>ملخص الأرقام الرئيسية</h2>
-        <table>
-            <thead>
+    <div class="container">
+        <!-- بطاقة ملخص الأرباح والخسائر -->
+        <div class="card">
+            <h3><i class="fas fa-chart-line"></i> ملخص الأرباح والخسائر</h3>
+            <table class="summary-table">
                 <tr>
                     <th>البند</th>
                     <th>القيمة (د.إ)</th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
-                    <td>إجمالي المصروفات الثابتة</td>
-                    <td id="totalFixedExpenses">0.00</td>
-                </tr>
-                <tr>
-                    <td>إجمالي المصروفات المتغيرة</td>
-                    <td id="totalVariableExpenses">0.00</td>
+                    <td>إجمالي الإيرادات</td>
+                    <td>7,500.00</td>
                 </tr>
                 <tr>
                     <td>إجمالي المصروفات</td>
-                    <td id="totalExpenses">0.00</td>
+                    <td>19,668.00</td>
                 </tr>
                 <tr>
-                    <td>إجمالي الإيرادات</td>
-                    <td id="totalRevenue">0.00</td>
+                    <td>صافي الربح/الخسائر</td>
+                    <td class="loss">-12,168.00</td>
                 </tr>
-                <tr>
-                    <td>صافي الربح/الخسارة</td>
-                    <td id="netLoss">0.00</td>
-                </tr>
-            </tbody>
-        </table>
+            </table>
+        </div>
 
-        <h2>المؤشرات المالية</h2>
-        <table>
-            <thead>
+        <!-- بطاقة المؤشرات المالية -->
+        <div class="card">
+            <h3><i class="fas fa-percentage"></i> المؤشرات المالية</h3>
+            <table class="summary-table">
                 <tr>
                     <th>المؤشر</th>
                     <th>القيمة</th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
                     <td>نسبة المصروفات إلى الإيرادات</td>
-                    <td id="expenseToRevenueRatio">0.00%</td>
+                    <td>262.24%</td>
                 </tr>
                 <tr>
                     <td>هامش الخسارة</td>
-                    <td id="lossMargin">0.00%</td>
+                    <td class="loss">-162.24%</td>
                 </tr>
-            </tbody>
-        </table>
+            </table>
+        </div>
 
-        <h2>رسم بياني: مقارنة الإيرادات والمصروفات</h2>
-        <div class="chart-container">
-            <canvas id="expensesRevenueChart"></canvas>
+        <!-- جدول مفصل للمصروفات -->
+        <div class="card">
+            <h3><i class="fas fa-table"></i> جدول مفصل للمصروفات</h3>
+            <table class="details-table">
+                <thead>
+                    <tr>
+                        <th>النوع</th>
+                        <th>التاريخ</th>
+                        <th>المبلغ (د.إ)</th>
+                        <th>الغرض</th>
+                        <th>المورد/المستفيد</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- المصروفات الثابتة -->
+                    <tr>
+                        <td rowspan="3">المصروفات الثابتة</td>
+                        <td>17-3-2026</td>
+                        <td>15,252.50</td>
+                        <td>رواتب الموظفين</td>
+                        <td>الانصارى للصرافة</td>
+                    </tr>
+                    <tr>
+                        <td>17-3-2026</td>
+                        <td>800.00</td>
+                        <td>رواتب</td>
+                        <td>عطا الرحمن</td>
+                    </tr>
+                    <tr>
+                        <td>46057</td>
+                        <td>722.51</td>
+                        <td>اتصالات</td>
+                        <td>اتصالات</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="background-color: #e0e0e0; font-weight: bold;">إجمالي المصروفات الثابتة: 16,775.01 د.إ</td>
+                    </tr>
+
+                    <!-- المصروفات المتغيرة -->
+                    <tr>
+                        <td rowspan="1">المصروفات المتغيرة</td>
+                        <td>17-3-2026</td>
+                        <td>200.00</td>
+                        <td>مصروفات تشغيلية</td>
+                        <td>محمد علي مامو</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="background-color: #e0e0e0; font-weight: bold;">إجمالي المصروفات المتغيرة: 200.00 د.إ</td>
+                    </tr>
+
+                    <!-- مصروفات الحفلات -->
+                    <tr>
+                        <td rowspan="1">مصروفات الحفلات</td>
+                        <td>17-3-2026</td>
+                        <td>2,693.00</td>
+                        <td>مصروفات حفل</td>
+                        <td>مورد الحفلات</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="background-color: #e0e0e0; font-weight: bold;">إجمالي مصروفات الحفلات: 2,693.00 د.إ</td>
+                    </tr>
+
+                    <!-- المجموع العام -->
+                    <tr>
+                        <td colspan="2" style="background-color: #C62828; color: white; font-weight: bold;">إجمالي المصروفات الكاملة</td>
+                        <td style="background-color: #C62828; color: white; font-weight: bold;">19,668.01 د.إ</td>
+                        <td colspan="2" style="background-color: #C62828; color: white;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- رسم بياني: مقارنة الإيرادات والمصروفات -->
+        <div class="card">
+            <h3><i class="fas fa-chart-bar"></i> مقارنة الإيرادات والمصروفات</h3>
+            <div class="chart-container">
+                <canvas id="expensesRevenueChart"></canvas>
+            </div>
+        </div>
+
+        <!-- رسم بياني: توزيع المصروفات -->
+        <div class="card">
+            <h3><i class="fas fa-chart-pie"></i> توزيع المصروفات</h3>
+            <div class="chart-container">
+                <canvas id="expensesDistributionChart"></canvas>
+            </div>
         </div>
     </div>
 
-    <!-- كود JavaScript لمعالجة الملف وعرض النتائج -->
     <script>
-        document.getElementById('fileInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, { type: 'array' });
-
-                // استخراج البيانات من صفحات Excel
-                const fixedExpensesSheet = workbook.Sheets["المصروفات الثابتة الشهرية"];
-                const variableExpensesSheet = workbook.Sheets["المصروفات المتغيرة "];
-                const revenueSheet = workbook.Sheets["الايرادات"];
-
-                // تحويل البيانات إلى مصفوفات
-                const fixedExpensesData = XLSX.utils.sheet_to_json(fixedExpensesSheet, { header: 1 });
-                const variableExpensesData = XLSX.utils.sheet_to_json(variableExpensesSheet, { header: 1 });
-                const revenueData = XLSX.utils.sheet_to_json(revenueSheet, { header: 1 });
-
-                // حساب مجاميع المصروفات الثابتة (العمود 3 في البيانات)
-                let totalFixedExpenses = 0;
-                for (let i = 3; i < fixedExpensesData.length; i++) {
-                    const row = fixedExpensesData[i];
-                    if (row && row[3] && !isNaN(row[3])) {
-                        totalFixedExpenses += parseFloat(row[3]);
-                    }
-                }
-
-                // حساب مجاميع المصروفات المتغيرة (العمود 3 في البيانات)
-                let totalVariableExpenses = 0;
-                for (let i = 3; i < variableExpensesData.length; i++) {
-                    const row = variableExpensesData[i];
-                    if (row && row[3] && !isNaN(row[3])) {
-                        totalVariableExpenses += parseFloat(row[3]);
-                    }
-                }
-
-                // حساب مجاميع الإيرادات (العمود 3 في البيانات)
-                let totalRevenue = 0;
-                for (let i = 3; i < revenueData.length; i++) {
-                    const row = revenueData[i];
-                    if (row && row[3] && !isNaN(row[3])) {
-                        totalRevenue += parseFloat(row[3]);
-                    }
-                }
-
-                // حساب صافي الربح/الخسارة
-                const totalExpenses = totalFixedExpenses + totalVariableExpenses;
-                const netLoss = totalRevenue - totalExpenses;
-
-                // حساب المؤشرات المالية
-                const expenseToRevenueRatio = (totalExpenses / totalRevenue) * 100;
-                const lossMargin = (netLoss / totalRevenue) * 100;
-
-                // عرض النتائج في الجداول
-                document.getElementById('totalFixedExpenses').textContent = totalFixedExpenses.toFixed(2);
-                document.getElementById('totalVariableExpenses').textContent = totalVariableExpenses.toFixed(2);
-                document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2);
-                document.getElementById('totalRevenue').textContent = totalRevenue.toFixed(2);
-                document.getElementById('netLoss').textContent = netLoss.toFixed(2);
-                document.getElementById('expenseToRevenueRatio').textContent = expenseToRevenueRatio.toFixed(2) + '%';
-                document.getElementById('lossMargin').textContent = lossMargin.toFixed(2) + '%';
-
-                // إنشاء الرسم البياني
-                const ctx = document.getElementById('expensesRevenueChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['الإيرادات', 'المصروفات الثابتة', 'المصروفات المتغيرة'],
-                        datasets: [{
-                            label: 'القيمة (د.إ)',
-                            data: [totalRevenue, totalFixedExpenses, totalVariableExpenses],
-                            backgroundColor: [
-                                'rgba(75, 192, 192, 0.6)',  // أخضر للإيرادات
-                                'rgba(255, 99, 132, 0.6)',  // أحمر للمصروفات الثابتة
-                                'rgba(255, 159, 64, 0.6)'   // برتقالي للمصروفات المتغيرة
-                            ],
-                            borderColor: [
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'القيمة (د.إ)'
-                                }
-                            }
+        // رسم بياني لمقارنة الإيرادات والمصروفات
+        const expensesRevenueCtx = document.getElementById('expensesRevenueChart').getContext('2d');
+        new Chart(expensesRevenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['الإيرادات', 'المصروفات الثابتة', 'المصروفات المتغيرة', 'مصروفات الحفلات'],
+                datasets: [{
+                    label: 'القيمة (د.إ)',
+                    data: [7500, 16775.01, 200, 2693],
+                    backgroundColor: [
+                        'rgba(76, 175, 80, 0.7)',  // أخضر للإيرادات
+                        'rgba(255, 99, 132, 0.7)', // أحمر للمصروفات الثابتة
+                        'rgba(255, 159, 64, 0.7)', // برتقالي للمصروفات المتغيرة
+                        'rgba(54, 162, 235, 0.7)'  // أزرق لمصروفات الحفلات
+                    ],
+                    borderColor: [
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'القيمة (د.إ)'
                         }
                     }
-                });
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: function(value) {
+                            return value.toLocaleString();
+                        }
+                    }
+                }
+            }
+        });
 
-                // عرض قسم النتائج
-                document.getElementById('results').style.display = 'block';
-            };
-            reader.readAsArrayBuffer(file);
+        // رسم بياني لتوزيع المصروفات
+        const expensesDistributionCtx = document.getElementById('expensesDistributionChart').getContext('2d');
+        new Chart(expensesDistributionCtx, {
+            type: 'pie',
+            data: {
+                labels: ['المصروفات الثابتة (16,775.01 د.إ)', 'المصروفات المتغيرة (200 د.إ)', 'مصروفات الحفلات (2,693 د.إ)'],
+                datasets: [{
+                    data: [16775.01, 200, 2693],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(54, 162, 235, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    },
+                    datalabels: {
+                        formatter: function(value) {
+                            return value.toLocaleString();
+                        }
+                    }
+                }
+            }
         });
     </script>
 </body>
