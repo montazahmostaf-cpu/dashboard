@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>داشبورد زفة مودرن - تحليل مالي لشهر 3-2026</title>
+    <title>داشبورد زفة مودرن - تحليل مالي لشهر 3-2026 (محدث)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -107,11 +107,11 @@
                 </tr>
                 <tr>
                     <td>إجمالي المصروفات</td>
-                    <td>19,668.00</td>
+                    <td>19,968.01</td>
                 </tr>
                 <tr>
                     <td>صافي الربح/الخسائر</td>
-                    <td class="loss">-12,168.00</td>
+                    <td class="loss">-12,468.01</td>
                 </tr>
             </table>
         </div>
@@ -126,11 +126,11 @@
                 </tr>
                 <tr>
                     <td>نسبة المصروفات إلى الإيرادات</td>
-                    <td>262.24%</td>
+                    <td>266.24%</td>
                 </tr>
                 <tr>
                     <td>هامش الخسارة</td>
-                    <td class="loss">-162.24%</td>
+                    <td class="loss">-166.24%</td>
                 </tr>
             </table>
         </div>
@@ -151,7 +151,7 @@
                 <tbody>
                     <!-- المصروفات الثابتة -->
                     <tr>
-                        <td rowspan="3">المصروفات الثابتة</td>
+                        <td rowspan="4">المصروفات الثابتة</td>
                         <td>17-3-2026</td>
                         <td>15,252.50</td>
                         <td>رواتب الموظفين</td>
@@ -169,8 +169,14 @@
                         <td>اتصالات</td>
                         <td>اتصالات</td>
                     </tr>
+                     <tr>
+                        <td>17-3-2026</td>
+                        <td>300.00</td>
+                        <td>مصروفات تشغيلية</td>
+                        <td>محمد علي مامو</td>
+                    </tr>
                     <tr>
-                        <td colspan="5" style="background-color: #e0e0e0; font-weight: bold;">إجمالي المصروفات الثابتة: 16,775.01 د.إ</td>
+                        <td colspan="5" style="background-color: #e0e0e0; font-weight: bold;">إجمالي المصروفات الثابتة: 17,075.01 د.إ</td>
                     </tr>
 
                     <!-- المصروفات المتغيرة -->
@@ -200,7 +206,7 @@
                     <!-- المجموع العام -->
                     <tr>
                         <td colspan="2" style="background-color: #C62828; color: white; font-weight: bold;">إجمالي المصروفات الكاملة</td>
-                        <td style="background-color: #C62828; color: white; font-weight: bold;">19,668.01 د.إ</td>
+                        <td style="background-color: #C62828; color: white; font-weight: bold;">19,968.01 د.إ</td>
                         <td colspan="2" style="background-color: #C62828; color: white;"></td>
                     </tr>
                 </tbody>
@@ -233,7 +239,7 @@
                 labels: ['الإيرادات', 'المصروفات الثابتة', 'المصروفات المتغيرة', 'مصروفات الحفلات'],
                 datasets: [{
                     label: 'القيمة (د.إ)',
-                    data: [7500, 16775.01, 200, 2693],
+                    data: [7500, 17075.01, 200, 2693],
                     backgroundColor: [
                         'rgba(76, 175, 80, 0.7)',  // أخضر للإيرادات
                         'rgba(255, 99, 132, 0.7)', // أحمر للمصروفات الثابتة
@@ -259,15 +265,6 @@
                             text: 'القيمة (د.إ)'
                         }
                     }
-                },
-                plugins: {
-                    datalabels: {
-                        anchor: 'end',
-                        align: 'top',
-                        formatter: function(value) {
-                            return value.toLocaleString();
-                        }
-                    }
                 }
             }
         });
@@ -277,9 +274,9 @@
         new Chart(expensesDistributionCtx, {
             type: 'pie',
             data: {
-                labels: ['المصروفات الثابتة (16,775.01 د.إ)', 'المصروفات المتغيرة (200 د.إ)', 'مصروفات الحفلات (2,693 د.إ)'],
+                labels: ['المصروفات الثابتة (17,075.01 د.إ)', 'المصروفات المتغيرة (200 د.إ)', 'مصروفات الحفلات (2,693 د.إ)'],
                 datasets: [{
-                    data: [16775.01, 200, 2693],
+                    data: [17075.01, 200, 2693],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.7)',
                         'rgba(255, 159, 64, 0.7)',
@@ -298,11 +295,6 @@
                 plugins: {
                     legend: {
                         position: 'right'
-                    },
-                    datalabels: {
-                        formatter: function(value) {
-                            return value.toLocaleString();
-                        }
                     }
                 }
             }
