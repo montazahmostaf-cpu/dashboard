@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحليل مالي - شهر 3-2026</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            direction: rtl;
+            text-align: right;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: right;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .profit {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .loss {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .summary {
+            background-color: #e6f7ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .chart-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>تحليل مالي - شهر 3-2026</h1>
+
+    <!-- ملخص مالي -->
+    <div class="summary">
+        <h2>الملخص المالي</h2>
+        <p><strong>إجمالي الإيرادات:</strong> <span id="total-revenue">7500</span> درهم</p>
+        <p><strong>إجمالي المصروفات:</strong> <span id="total-expense">11665.5</span> درهم</p>
+        <p><strong>صافي الربح/الخسارة:</strong> <span id="net-profit">-4165.5</span> درهم</p>
+        <p><strong>الحالة:</strong> <span id="status">خسارة (لا يستحق)</span></p>
+    </div>
+
+    <!-- جدول المصروفات الثابتة -->
+    <h2>المصروفات الثابتة</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>البند</th>
+                <th>المبلغ (درهم)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>رواتب</td>
+                <td>4000</td>
+            </tr>
+            <tr>
+                <td>إيجار</td>
+                <td>1250</td>
+            </tr>
+            <tr>
+                <td>صندوق أبوظبي للتقاعد</td>
+                <td>2600</td>
+            </tr>
+            <tr>
+                <td>فواتير اتصالات</td>
+                <td>722.5</td>
+            </tr>
+            <tr>
+                <td>أغراض تنظيف</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>إعلانات</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td><strong>إجمالي المصروفات الثابتة</strong></td>
+                <td><strong>8972.5</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- جدول الحفل -->
+    <h2>حفل خالد إسماعيل خلف</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>البند</th>
+                <th>المبلغ (درهم)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>إيرادات الحفل</td>
+                <td>7500</td>
+            </tr>
+            <tr>
+                <td>مصروفات الحفل</td>
+                <td>2693</td>
+            </tr>
+            <tr>
+                <td><strong>صافي ربح الحفل</strong></td>
+                <td><strong>4807</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- رسم بياني للمقارنة -->
+    <h2>المقارنة بين الإيرادات والمصروفات</h2>
+    <div class="chart-container">
+        <canvas id="financialChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // بيانات الرسم البياني
+        const ctx = document.getElementById('financialChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['إيرادات الحفل', 'مصروفات ثابتة', 'مصروفات الحفل'],
+                datasets: [{
+                    label: 'المبلغ (درهم)',
+                    data: [7500, 8972.5, 2693],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)', // إيرادات (أخضر)
+                        'rgba(255, 99, 132, 0.6)', // مصروفات ثابتة (أحمر)
+                        'rgba(255, 159, 64, 0.6)'  // مصروفات الحفل (برتقالي)
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // تحديد حالة الربح/الخسارة
+        const netProfit = -4165.5;
+        const statusElement = document.getElementById('status');
+        const netProfitElement = document.getElementById('net-profit');
+
+        if (netProfit >= 0) {
+            statusElement.textContent = "ربح (يستحق)";
+            netProfitElement.className = "profit";
+        } else {
+            statusElement.textContent = "خسارة (لا يستحق)";
+            netProfitElement.className = "loss";
+        }
+    </script>
+</body>
+</html>
