@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>داشبورد زفة مودرن - تحليل مالي احترافي لشهر فبراير 2026</title>
+    <title>داشبورد معهد دايركت - تحليل مالي لشهر فبراير 2026</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --secondary-color: #26A69A;
-            --background-color: #f9f9f9;
+            --primary-color: #F44336;
+            --secondary-color: #E91E63;
+            --background-color: #f5f5f5;
             --card-color: #ffffff;
             --text-color: #333333;
-            --profit-color: #2E7D32;
-            --loss-color: #C62828;
+            --profit-color: #4CAF50;
+            --loss-color: #F44336;
             --border-color: #dddddd;
             --dark-bg: #121212;
             --dark-card: #1e1e1e;
             --dark-text: #e0e0e0;
-            --highlight-color: #ff9800;
+            --highlight-color: #FF9800;
         }
 
         body {
@@ -65,7 +65,7 @@
         }
 
         h1, h2, h3 {
-            color: var(--primary-color);
+            color: white;
             margin-bottom: 15px;
             transition: color 0.3s ease;
         }
@@ -73,23 +73,17 @@
         body.dark-mode h1,
         body.dark-mode h2,
         body.dark-mode h3 {
-            color: #bb86fc;
+            color: #ffebee;
         }
 
         h1 {
             font-size: 28px;
-            border-bottom: 2px solid var(--secondary-color);
+            border-bottom: 2px solid white;
             padding-bottom: 10px;
         }
 
         h2 {
             font-size: 22px;
-            color: var(--secondary-color);
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode h2 {
-            color: #03dac6;
         }
 
         .chart-container {
@@ -116,7 +110,7 @@
         }
 
         .card {
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
             padding: 15px;
             border-radius: 8px;
             width: 200px;
@@ -128,7 +122,7 @@
         }
 
         body.dark-mode .card {
-            background: linear-gradient(135deg, #2d2d2d, #3a3a3a);
+            background: linear-gradient(135deg, #420000, #610000);
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         }
 
@@ -146,19 +140,15 @@
             background: var(--primary-color);
         }
 
-        body.dark-mode .card::before {
-            background: #bb86fc;
-        }
-
         .card h4 {
             margin: 0 0 10px 0;
-            color: var(--profit-color);
+            color: var(--primary-color);
             font-size: 16px;
             transition: color 0.3s ease;
         }
 
         body.dark-mode .card h4 {
-            color: #03dac6;
+            color: #ffebee;
         }
 
         .card p {
@@ -207,7 +197,7 @@
         }
 
         body.dark-mode th {
-            background-color: #bb86fc;
+            background-color: #610000;
         }
 
         tr:nth-child(even) {
@@ -257,19 +247,15 @@
         }
 
         body.dark-mode button {
-            background-color: #bb86fc;
+            background-color: #610000;
         }
 
         button:hover {
             background-color: var(--secondary-color);
         }
 
-        body.dark-mode button:hover {
-            background-color: #03dac6;
-        }
-
         .filter-section {
-            background: #e3f2fd;
+            background: #FFEBEE;
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
@@ -277,7 +263,7 @@
         }
 
         body.dark-mode .filter-section {
-            background-color: #262626;
+            background-color: #420000;
         }
 
         .highlight {
@@ -287,7 +273,7 @@
         }
 
         body.dark-mode .highlight {
-            color: #ff9800;
+            color: #FF9800;
         }
 
         .toggle-container {
@@ -309,26 +295,34 @@
         }
 
         body.dark-mode .toggle {
-            background-color: #bb86fc;
+            background-color: #610000;
         }
 
         .toggle:hover {
             background-color: var(--secondary-color);
         }
 
-        body.dark-mode .toggle:hover {
-            background-color: #03dac6;
+        .result-box {
+            background-color: #FFEBEE;
+            color: var(--loss-color);
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+            border: 1px solid var(--loss-color);
         }
 
-        .icon {
-            margin-left: 8px;
+        body.dark-mode .result-box {
+            background-color: #420000;
+            color: #ffebee;
+            border-color: #ffebee;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>داشبورد زفة مودرن لتنظيم الحفلات</h1>
-        <h2>تحليل مالي احترافي لشهر فبراير 2026</h2>
+        <h1>داشبورد معهد دايركت</h1>
+        <h2>تحليل مالي لشهر فبراير 2026</h2>
     </header>
 
     <div class="toggle-container">
@@ -342,33 +336,37 @@
         <!-- ملخص سريع -->
         <div class="summary-card">
             <div class="card">
+                <h4>إيرادات المصروفات الثابتة</h4>
+                <p class="highlight" id="fixedRevenue">21,443.00 د.إ</p>
+            </div>
+            <div class="card">
+                <h4>إيرادات المصروفات المتغيرة</h4>
+                <p class="highlight" id="variableRevenue">4,626.48 د.إ</p>
+            </div>
+            <div class="card">
                 <h4>إجمالي الإيرادات</h4>
-                <p class="highlight">39,600.00 د.إ</p>
+                <p class="highlight" id="totalRevenue">26,070.00 د.إ</p>
             </div>
             <div class="card">
                 <h4>المصروفات الثابتة</h4>
-                <p class="highlight">15,920.09 د.إ</p>
+                <p class="highlight" id="fixedExpenses">21,443.00 د.إ</p>
             </div>
             <div class="card">
                 <h4>المصروفات المتغيرة</h4>
-                <p class="highlight">4,057.00 د.إ</p>
+                <p class="highlight" id="variableExpenses">4,626.48 د.إ</p>
             </div>
             <div class="card">
                 <h4>إجمالي المصروفات</h4>
-                <p class="highlight">19,977.09 د.إ</p>
+                <p class="highlight" id="totalExpenses">26,070.00 د.إ</p>
             </div>
             <div class="card">
-                <h4>صافي الربح قبل الضريبة</h4>
-                <p class="highlight profit">19,622.91 د.إ</p>
+                <h4>صافي الأرباح والخسائر</h4>
+                <p class="highlight loss" id="netProfit">-26,070.00 د.إ</p>
             </div>
-            <div class="card">
-                <h4>الضريبة (5%)</h4>
-                <p class="highlight">1,980.00 د.إ</p>
-            </div>
-            <div class="card">
-                <h4>صافي الربح بعد الضريبة</h4>
-                <p class="highlight profit">17,642.91 د.إ</p>
-            </div>
+        </div>
+
+        <div class="result-box">
+            <p>نتيجة الأرباح والخسائر: خسارة</p>
         </div>
 
         <!-- قسم الفلترة -->
@@ -376,9 +374,8 @@
             <h3>فلترة البيانات</h3>
             <label for="dataType">نوع البيانات:</label>
             <select id="dataType" onchange="updateCharts()">
-                <option value="revenues">إيرادات الحفلات</option>
-                <option value="expenses">المصروفات الثابتة</option>
-                <option value="variableExpenses">المصروفات المتغيرة</option>
+                <option value="revenues">الإيرادات</option>
+                <option value="expenses">المصروفات</option>
             </select>
         </div>
 
@@ -400,29 +397,37 @@
                 <thead>
                     <tr>
                         <th>مسلسل</th>
-                        <th>اسم العميل</th>
-                        <th>مكان الحفل</th>
-                        <th>قيمة العقد</th>
+                        <th>التاريخ</th>
+                        <th>اسم المورد</th>
+                        <th>قيمة الفاتورة</th>
+                        <th>رقم الفاتورة</th>
+                        <th>البيان</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>حمد خميس إبراهيم</td>
-                        <td>أبوظبي</td>
-                        <td>32,100.00</td>
+                        <td>2026-02-28</td>
+                        <td>دايركت موبيل</td>
+                        <td>30,383.33</td>
+                        <td>2026-02-28</td>
+                        <td>إيجار المكتب</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>منى محمد الظاهر</td>
-                        <td>زاخر</td>
-                        <td>6,000.00</td>
+                        <td>2026-02-23</td>
+                        <td>الاصدارى للصرف</td>
+                        <td>17,542.00</td>
+                        <td>126236445466</td>
+                        <td>رواتب شهر 2</td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>راية علي محمد بن وديمة</td>
-                        <td>الساد</td>
-                        <td>1,500.00</td>
+                        <td>2026-03-24</td>
+                        <td>etisalat</td>
+                        <td>862.72</td>
+                        <td>b2b398350408</td>
+                        <td>فواتير الموبيل</td>
                     </tr>
                 </tbody>
             </table>
@@ -436,117 +441,44 @@
                     <tr>
                         <th>مسلسل</th>
                         <th>التاريخ</th>
+                        <th>اسم المورد</th>
                         <th>قيمة الفاتورة</th>
+                        <th>رقم الفاتورة</th>
                         <th>البيان</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>15/2/2026</td>
-                        <td>2,031.50</td>
-                        <td>رواتب شهر 2-2026</td>
+                        <td>2026-02-03</td>
+                        <td>al hamwl global</td>
+                        <td>36.00</td>
+                        <td>2026-02-03</td>
+                        <td>تصوير أوراق</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>24/2/2026</td>
-                        <td>9,247.25</td>
-                        <td>رواتب شهر 2-2026</td>
+                        <td>2026-02-08</td>
+                        <td>ادنوك</td>
+                        <td>100.00</td>
+                        <td>2026-02-08</td>
+                        <td>بترول سيارة</td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>28/2/2026</td>
-                        <td>500.00</td>
-                        <td>رواتب شهر 2-2026</td>
+                        <td>2026-02-19</td>
+                        <td>ادنوك</td>
+                        <td>100.00</td>
+                        <td>2026-02-19</td>
+                        <td>بترول سيارة</td>
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td>28/2/2026</td>
-                        <td>1,600.00</td>
-                        <td>عمالة رواتب شهر 2-2026</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>28/2/2026</td>
-                        <td>305.00</td>
-                        <td>أغراض تنظيف للشركة عن شهر 1</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>28/2/2026</td>
-                        <td>1,500.00</td>
-                        <td>عمالة رواتب شهر 2-2026</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>24/3/2026</td>
-                        <td>736.34</td>
-                        <td>فاتورة موبيل عن شهر 2-2026</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- جدول تفاصيل المصروفات المتغيرة -->
-        <div class="chart-container">
-            <h3>تفاصيل المصروفات المتغيرة</h3>
-            <table id="variableExpensesTable">
-                <thead>
-                    <tr>
-                        <th>مسلسل</th>
-                        <th>التاريخ</th>
-                        <th>قيمة الفاتورة</th>
-                        <th>البيان</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2/2/2026</td>
-                        <td>100.00</td>
-                        <td>بترول سيارة الشركة</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>20/2/2026</td>
-                        <td>150.00</td>
-                        <td>بترول مشوار دبي</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>24/2/2026</td>
-                        <td>30.00</td>
-                        <td>بترول سيارة الشركة</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>25/2/2026</td>
-                        <td>100.00</td>
-                        <td>بترول سيارة الشركة</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>27/2/2026</td>
-                        <td>500.00</td>
-                        <td>تقديم ضريبة الشركة</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>27/2/2026</td>
-                        <td>100.00</td>
-                        <td>تبديل أويل + فيلتر</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>28/2/2026</td>
-                        <td>1,000.00</td>
-                        <td>نسبة مبيعات</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>28/2/2026</td>
-                        <td>2,077.00</td>
-                        <td>نسبة مبيعات</td>
+                        <td>2026-02-23</td>
+                        <td>الهيئة الإحصائية للضريبة</td>
+                        <td>4,426.48</td>
+                        <td>2026-02-23</td>
+                        <td>ضريبة عن الفترة من 31/1/2026 إلى 1/11/2025</td>
                     </tr>
                 </tbody>
             </table>
@@ -555,15 +487,24 @@
 
     <script>
         // البيانات المالية
-        const totalRevenue = 39600.00;
-        const fixedExpenses = 15920.09;
-        const variableExpenses = 4057.00;
+        const fixedRevenue = 21443.00;
+        const variableRevenue = 4626.48;
+        const totalRevenue = fixedRevenue + variableRevenue;
+        const fixedExpenses = 21443.00;
+        const variableExpenses = 4626.48;
         const totalExpenses = fixedExpenses + variableExpenses;
-        const grossProfit = totalRevenue - totalExpenses;
-        const tax = 1980.00; // 5% من الإيرادات
-        const netProfit = grossProfit - tax;
+        const netProfit = totalRevenue - totalExpenses;
 
-        // تحديث الرسوم البيانية
+        // تحديث الملخص
+        document.getElementById('fixedRevenue').textContent = fixedRevenue.toFixed(2) + " د.إ";
+        document.getElementById('variableRevenue').textContent = variableRevenue.toFixed(2) + " د.إ";
+        document.getElementById('totalRevenue').textContent = totalRevenue.toFixed(2) + " د.إ";
+        document.getElementById('fixedExpenses').textContent = fixedExpenses.toFixed(2) + " د.إ";
+        document.getElementById('variableExpenses').textContent = variableExpenses.toFixed(2) + " د.إ";
+        document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2) + " د.إ";
+        document.getElementById('netProfit').textContent = netProfit.toFixed(2) + " د.إ";
+
+        // إنشاء الرسوم البيانية
         const mainCtx = document.getElementById('mainChart').getContext('2d');
         const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
 
@@ -572,13 +513,12 @@
         // رسم توزيع الإيرادات والمصروفات
         function renderRevenuesChart() {
             const data = {
-                labels: ['إيرادات', 'مصروفات ثابتة', 'مصروفات متغيرة'],
+                labels: ['إيرادات المصروفات الثابتة', 'إيرادات المصروفات المتغيرة'],
                 datasets: [{
-                    data: [totalRevenue, fixedExpenses, variableExpenses],
+                    data: [fixedRevenue, variableRevenue],
                     backgroundColor: [
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 206, 86, 0.7)'
+                        'rgba(244, 67, 54, 0.7)',
+                        'rgba(233, 30, 99, 0.7)'
                     ],
                     borderWidth: 1
                 }]
@@ -610,71 +550,15 @@
             });
         }
 
-        // رسم توزيع المصروفات الثابتة
-        function renderFixedExpensesChart() {
-            const fixedExpensesData = [
-                { label: 'رواتب', value: 13679.31 },
-                { label: 'موبيل', value: 736.34 },
-                { label: 'تنظيف', value: 305.00 },
-                { label: 'عمالة', value: 1200.44 }
-            ];
-
+        // رسم توزيع المصروفات
+        function renderExpensesChart() {
             const data = {
-                labels: fixedExpensesData.map(item => item.label),
+                labels: ['المصروفات الثابتة', 'المصروفات المتغيرة'],
                 datasets: [{
-                    data: fixedExpensesData.map(item => item.value),
+                    data: [fixedExpenses, variableExpenses],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)'
-                    ],
-                    borderWidth: 1
-                }]
-            };
-
-            if (mainChart) mainChart.destroy();
-
-            mainChart = new Chart(mainCtx, {
-                type: 'pie',
-                data: data,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'right' },
-                        datalabels: {
-                            formatter: (value, ctx) => {
-                                const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                const percentage = Math.round((value / total) * 100);
-                                return `${percentage}%`;
-                            },
-                            color: getComputedStyle(document.body).getPropertyValue('--text-color'),
-                            font: {
-                                weight: 'bold'
-                            }
-                        }
-                    }
-                },
-                plugins: [ChartDataLabels]
-            });
-        }
-
-        // رسم توزيع المصروفات المتغيرة
-        function renderVariableExpensesChart() {
-            const variableExpensesData = [
-                { label: 'بترول', value: 380.00 },
-                { label: 'ضريبة', value: 500.00 },
-                { label: 'نسبة مبيعات', value: 3077.00 }
-            ];
-
-            const data = {
-                labels: variableExpensesData.map(item => item.label),
-                datasets: [{
-                    data: variableExpensesData.map(item => item.value),
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)'
+                        'rgba(244, 67, 54, 0.7)',
+                        'rgba(233, 30, 99, 0.7)'
                     ],
                     borderWidth: 1
                 }]
@@ -709,16 +593,14 @@
         // رسم مقارنة الإيرادات والمصروفات
         function renderComparisonChart() {
             const data = {
-                labels: ['إيرادات', 'مصروفات ثابتة', 'مصروفات متغيرة', 'صافي الربح قبل الضريبة', 'صافي الربح بعد الضريبة'],
+                labels: ['إيرادات', 'مصروفات', 'صافي الربح'],
                 datasets: [{
                     label: 'القيمة (د.إ)',
-                    data: [totalRevenue, fixedExpenses, variableExpenses, grossProfit, netProfit],
+                    data: [totalRevenue, totalExpenses, netProfit],
                     backgroundColor: [
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(153, 102, 255, 0.7)'
+                        'rgba(244, 67, 54, 0.7)',
+                        'rgba(233, 30, 99, 0.7)',
+                        netProfit >= 0 ? 'rgba(76, 175, 80, 0.7)' : 'rgba(244, 67, 54, 0.7)'
                     ],
                     borderWidth: 1
                 }]
@@ -742,14 +624,11 @@
         function updateCharts() {
             const dataType = document.getElementById('dataType').value;
             if (dataType === 'revenues') {
-                document.getElementById('chartTitle').textContent = 'توزيع الإيرادات والمصروفات';
+                document.getElementById('chartTitle').textContent = 'توزيع الإيرادات';
                 renderRevenuesChart();
-            } else if (dataType === 'expenses') {
-                document.getElementById('chartTitle').textContent = 'توزيع المصروفات الثابتة';
-                renderFixedExpensesChart();
-            } else if (dataType === 'variableExpenses') {
-                document.getElementById('chartTitle').textContent = 'توزيع المصروفات المتغيرة';
-                renderVariableExpensesChart();
+            } else {
+                document.getElementById('chartTitle').textContent = 'توزيع المصروفات';
+                renderExpensesChart();
             }
             renderComparisonChart();
         }
@@ -757,7 +636,7 @@
         // تبديل الوضع الداكن
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
-            updateCharts(); // تحديث الرسوم عند تبديل الوضع
+            updateCharts();
         }
 
         // تهيئة الرسوم عند تحميل الصفحة
